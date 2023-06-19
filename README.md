@@ -6,7 +6,7 @@ What drives the price of used cars? After running multiple models we can draw so
 The data is soured from the UCI Machine Learning repository collected via Amazon Mechnical Turk
 
 ### Methodology
-Data analysis is done using Python in a Jupyter Notebook file located in the root directory of this project.
+Data on used cars sourced from Kaggle. [Here](data/vehicles.csv)
 
 ### Goal
 Deliver business actionable insights on the coffee house coupon group. What factors are highly correlated with accepting the coupon? What factors are correlated with rejecting the coupon?
