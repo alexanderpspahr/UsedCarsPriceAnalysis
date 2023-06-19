@@ -2,6 +2,8 @@
 
 What drives the price of used cars? After running multiple models we can draw some conclusions about what factors most affect the price at which a used car will sell.
 
+[Here](ModellingAndAnalysis.ipynb) is the in depth analysis and conclusions including source code for all models used and the entire process.
+
 ### Data
 The data is soured from the UCI Machine Learning repository collected via Amazon Mechnical Turk
 
