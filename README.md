@@ -5,10 +5,10 @@ What drives the price of used cars? After running multiple models we can draw so
 [Here](ModellingAndAnalysis.ipynb) is the in depth analysis and conclusions including source code for all models used and the entire process.
 
 ### Data
-The data is soured from the UCI Machine Learning repository collected via Amazon Mechnical Turk
+Data on used cars sourced from Kaggle. [Here](data/vehicles.csv)
 
 ### Methodology
-Data on used cars sourced from Kaggle. [Here](data/vehicles.csv)
+
 
 ### Goal
 Deliver business actionable insights on the coffee house coupon group. What factors are highly correlated with accepting the coupon? What factors are correlated with rejecting the coupon?
