@@ -1,8 +1,6 @@
-# When Will a Customer Accept a Coffee House Coupon?
+# Analysis on Price of Used Cars
 
-Customers are surveyed about various driving scenarios under which the premise is to determine whether or not they will accept a certain coupon if they are the driver. 
-Our objective is to determine the differences between the groups that choose to accept or reject the coupon for one group of coupons. In this study, we will be looking at
-the coffee house coupons.
+What drives the price of used cars? After running multiple models we can draw some conclusions about what factors most affect the price at which a used car will sell.
 
 ### Data
 The data is soured from the UCI Machine Learning repository collected via Amazon Mechnical Turk
