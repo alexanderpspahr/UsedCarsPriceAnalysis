@@ -8,65 +8,62 @@ What drives the price of used cars? After running multiple models we can draw so
 Data on used cars sourced from Kaggle. [Here](data/vehicles.csv)
 
 ### Methodology
+1. Data - removed all empty values and nonsensical values. Scaled data pre-analysis as necessary.
+2. Models - ran 5 models
+ - Simple linear regression model with no feature selection
+ - A ridge model
+ - A lasso model
+ - A linear regression model with polynomial features
+ - A linear regression model with polynomial features only using numeric values
+3. Cross validation - simple cross validation due to size of data
+4. Evaluation - evaluated using median absolute error. We used median because the distribution of prices is right-skewed, and it is more important to be accurate the more to the left we are in the distribution
 
 
 ### Goal
-Deliver business actionable insights on the coffee house coupon group. What factors are highly correlated with accepting the coupon? What factors are correlated with rejecting the coupon?
+Successfully predict price of used cars as well as identify some factors that cause increased price of used cars
 
 # Insights
-**Note: we will often refer to coffee house coupons as CH from this point forward.**
 
-### Insight 1: Drivers who visit coffee houses more often are more likely to accept the coupon
+### Insight 1: Used cars depreciate in value
 
-![image](https://user-images.githubusercontent.com/129889030/230995133-af7d3638-1dfa-4a18-8d39-0f1ff9064c6e.png)
+![PriceByYear](https://github.com/alexanderpspahr/UsedCarsPriceAnalysis/assets/129889030/4fc38bad-a75e-4f8f-b20a-c1705f78e996)
 
-This may come as no surprise, but those who never visit CH are more likely to reject the coupon, while those who visit more often are more likely in general to accept. This remains true when controlled for other variables such as income, age, time of day, etc...
+This is common knowledge in the used car industry, but it is a very important factor in determining the price of a used car. Our model considered this the tenth most important feature, but it is important to note that almost all of the features above it pertained to the manufacturer and the fuel type of a car. Indicating that when adjusted for manufacturer and fuel type, the year of the car is one of the absolute best indicators of whether or not a car will sell for a high price.
 
-We can also clearly see that this trend is only for CH. It is not true that those who visit bars, restaraunts, or take-away are more likely to visit CH. Here is an example of 
-what one of these graphs looks like:
+### Insight 2: Manufacturer is very, very important in determining price
 
-![image](https://user-images.githubusercontent.com/129889030/230996220-619b0f8f-2691-412c-8f21-7564b14907f6.png)
+Out of the factors that make up the bottom 5 important features for our model and the top 5 features for our model, the manufacturer comprises 90%  (9/10) of those factors. 
 
-As we can see there is no evidence of the same trend.
+For reference, here is what the distribution of price looks like for top 5 manufacturers vs the rest:
 
-### Insight 2: Drivers who are alone are more likely to accept the CH coupon
+![Top5VsOtherPrice](https://github.com/alexanderpspahr/UsedCarsPriceAnalysis/assets/129889030/721b0bbf-7698-4e14-b459-aebc60486e3d)
 
-When controlled for other variables. Drivers who are alone are more likely to accept the CH coupon
+There are 5 specific manufacturers that reign above all others statistically. They are (ordered):
+1. Ferrari
+2. Aston-Martin
+3. Tesla
+4. Dotsun
+5. Porsche
 
-![image](https://user-images.githubusercontent.com/129889030/230997162-136e5798-f0dd-4a7f-a3cd-6b6d38fa4896.png)
 
-When grouped by whether or not the driver had a passenger, they were more likely to accept if they were alone. The one standout passenger type is kid(s). In this case there is still a nearly 50/50 chance the driver will accept:
+### Insight 3: Fuel type is the next most important factor
 
-![image](https://user-images.githubusercontent.com/129889030/230997559-e9110054-bc4f-4635-9d02-58c8e6b5ddb4.png)
+Fuel type is one of the most important factors in determing a used cars value. Diesel cars and electric cars are more expensive, while alternative fuel cars are less expensive.
 
-### Insight 3: Jobs have a notable effect on acceptance rate
+### Insight 4: Our Model is usable for business cases in which we need to find the ballpark price of a used car
 
-Here is the acceptance rate of the CH coupon by occupation
-![image](https://user-images.githubusercontent.com/129889030/230998018-f072ad5a-51f8-45e9-9210-d933de53b527.png)
+Our model had a median absolute error of around 3500, which is good for ballpark estimates. If we need exact price, it is not good enough, but it is certainly better than any trivial solution. This is mostly related to the fact that the model can estimate the price better based on manufacturer, which is one of the most important aspects of price, as we have seen previously.
 
-Jobs classified as Healthcare Practitioners & Technical or Building & Grounds Cleaning & Maintenance were the two statistically significant examples of occupations which accepted more than average coupons. Building & Grounds Cleaning & Maintenance had a sample size of 11, however, so we can only say that Healthcare Practitioners & Technical are more likely to accept a CH coupon than any other occupation. With that being said, this is a potentially actionable item.
+## Final Notable Findings and Conclusions
 
-### Insight 4: People are less likely to accept CH coupons in snow
+1. **Timing:** Used cars mostly depreciate in value over time, and the year of the car is very important
+2. **Brands** There is a top 5 "holy grail" brands for used cars which are significantly higher price and includes cars from: Ferrari, Aston-martin, Tesla, Datsun, and Porsche, in that order  
+3. **Fuel Type:** Fuel type matters a lot in used cars with diesel and electric having the highest selling point on average, and alternative fuels being the lowest  
+4. **Location:** Alaska is the best state for selling used cars at high prices by a significant margin, this is likely because it is hard to find cars there.  
+5. **Model Performance:** Our model can predict the price of used cars with an average error of around 3500, which is a good ballpark estimate.  
 
-![image](https://user-images.githubusercontent.com/129889030/231000034-99ffd682-a137-433a-8d13-1c8d74709626.png)
-
-I guess it is no surprise. We can surmise this likely applies to people who would intend to use the coupons immediately. Further study is needed on this item regarding the intensity of the snow, since snow is bad driving weather. We also need to do a study on whether the people that accepted or rejected the coupon in the snow planned to use the coupon now, or later.
-
-### Insight 5: Above room temperature weather is correlated with CH coupon acceptance
-
-![image](https://user-images.githubusercontent.com/129889030/231002515-5c60b5e8-16d4-457d-96df-c44ecb1ab22a.png)
-
-Weather at ~80F has significantly greater proportion of CH coupon acceptances than weather below that threshold. This is a potentially surprising find given that one may assume that people enjoy drinking hot coffee during cold weather, but it is highly relevant.
-
-# Conclusion - Business Actionable Items for the Future
-
-**Here is a list of recommendations for groups to be targetted with extra CH coupons based on the findings in this report:**
-1. People who frequent coffee houses
-2. People who are driving in warmer weather (above room temp, approximately)
-3. Healthcare and technical healthcare professionals
-4. People who are driving alone
-
-**Here is a list of items that require further study**
-1. What criteria makes people who are driving with kids accept or reject the coupon?
-2. How does extreme snowy weather compare with 'light' or 'average' snowy weather when it comes to coupon acceptance?
-3. How do the groups which accept the coupon for immediate use vs groups who accept it for future use compare? Are there any differences?
+Next Steps:
+1. Stock inventory with newer cars
+2. Be on the look at for top 5 brands
+3. Stock inventory with as many diesel and electric cars as possible
+4. Use model to predict ballpark price
